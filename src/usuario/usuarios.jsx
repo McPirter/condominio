@@ -1,29 +1,39 @@
 import React from 'react';
-import './usuario.css'; // Asegúrate de tener los estilos necesarios
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+import './usuario.css';
 
 const Usuarios = () => {
+  const navigate = useNavigate(); // Hook para navegar entre rutas
+
   const data = [
     { nombre: 'Edson Pérez', perfil: 'Administrador' },
-    { nombre: 'Pancho López', perfil: 'Patron' },
+    { nombre: 'Pancho López', perfil: 'Jefe' },
     { nombre: 'Webos Ruiz', perfil: 'Usuario' },
-  ]; // Datos de ejemplo para llenar la tabla
+  ];
 
   const handleAgregar = () => {
-    alert('Agregar nuevo usuario'); // Aquí puedes redirigir a un formulario o realizar otra acción
+    navigate('/usuario/nuevo_user'); // Navega a nuevo_user.jsx
   };
 
-  const handleEditar = (nombre) => {
-    alert(`Editar usuario: ${nombre}`);
+  const handlePagos = () => {
+    navigate('/usuario/pagos'); // Navega a pagos.jsx
   };
 
-  const handleEliminar = (nombre) => {
-    alert(`Eliminar usuario: ${nombre}`);
+  const handleMultas = () => {
+    navigate('/usuario/multas'); // Navega a multas.jsx
+  };
+
+  const handlePermisos = () => {
+    navigate('/usuario/permisos'); // Navega a permisos.jsx
   };
 
   return (
     <div className="usuarios-container">
       <h1>Gestión de Usuarios</h1>
-      <button className="btn-agregar" onClick={handleAgregar}>Agregar</button>
+      <button className="btn-agregar" onClick={handleAgregar}>
+        <img src="/src/imagenes/mas.png" alt="Agregar" className="btn-icon" />
+        Agregar
+      </button>
       <table className="tabla-usuarios">
         <thead>
           <tr>
@@ -35,20 +45,20 @@ const Usuarios = () => {
         <tbody>
           {data.map((usuario, index) => (
             <tr key={index}>
-              <td>{usuario.nombre}</td>
-              <td>{usuario.perfil}</td>
+              <td className="tabla-texto">{usuario.nombre}</td>
+              <td className="tabla-texto">{usuario.perfil}</td>
               <td>
-                <button
-                  className="btn-accion"
-                  onClick={() => handleEditar(usuario.nombre)}
-                >
-                  Editar
+                <button className="btn-accion" onClick={handlePagos}>
+                  <img src="/src/imagenes/pago.png" alt="Pagos" className="btn-icon" />
+                  Pagos
                 </button>
-                <button
-                  className="btn-accion btn-eliminar"
-                  onClick={() => handleEliminar(usuario.nombre)}
-                >
-                  Eliminar
+                <button className="btn-accion btn-multas" onClick={handleMultas}>
+                  <img src="/src/imagenes/multa.png" alt="Multas" className="btn-icon" />
+                  Multas
+                </button>
+                <button className="btn-accion btn-permisos" onClick={handlePermisos}>
+                  <img src="/src/imagenes/permiso.png" alt="Permisos" className="btn-icon" />
+                  Permisos
                 </button>
               </td>
             </tr>

@@ -81,80 +81,93 @@ body {
     }
   }
 
+/* usuarios*/
+  
 
-  
-  .usuarios-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .btn-agregar {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
-  
-  .btn-agregar:hover {
-    background-color: #45a049;
-  }
-  
-  .tabla-usuarios {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .tabla-usuarios th,
-  .tabla-usuarios td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .tabla-usuarios th {
-    background-color: #f2f2f2;
-    color: #333;
-  }
-  
-  .tabla-usuarios tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .tabla-usuarios tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .btn-accion {
-    background-color: #4CAF50;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 5px;
-    font-size: 14px;
-  }
-  
-  .btn-accion.btn-eliminar {
-    background-color: #f44336;
-  }
-  
-  .btn-accion:hover {
-    opacity: 0.8;
-  }
-  
-  
+
+.usuarios-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.btn-agregar img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.btn-agregar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.btn-agregar:hover {
+  background-color: #45a049;
+}
+
+.tabla-usuarios {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  color: #000; /* Texto de las columnas en negro */
+}
+
+.tabla-usuarios th {
+  background-color: #f2f2f2;
+  color: #333; /* Texto del encabezado de la tabla */
+}
+
+.tabla-usuarios tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.tabla-usuarios tr:hover {
+  background-color: #f1f1f1;
+}
+
+.btn-accion {
+  background-color: #007BFF;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+.btn-accion:hover {
+  background-color: #0056b3;
+}

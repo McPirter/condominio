@@ -12,14 +12,16 @@ const App = () => {
             <img src="src/imagenes/ubicacion.png" alt="Ubicación" className="nav-icon" />
             <span>Ubicación</span>
           </button>
+          <Link to="/condominios/condominio">
           <button className="nav-item">
             <img src="src/imagenes/condominio.png" alt="Condominios" className="nav-icon" />
             <span>Condominios</span>
-          </button>
+          </button></Link>
+          <Link to="./pagar">
           <button className="nav-item">
             <img src="src/imagenes/servicios.png" alt="Servicios" className="nav-icon" />
             <span>Servicios</span>
-          </button>
+          </button></Link>
         </div>
         {/* Enlace al login */}
         <Link to="/usuario/login" className="profile-icon">

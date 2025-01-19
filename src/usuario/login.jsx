@@ -19,10 +19,6 @@ const Login = () => {
           <input type="text" id="telefono" name="telefono" required />
         </div>
         <div className="form-group">
-          <label htmlFor="nombre">Nombre completo:</label>
-          <input type="text" id="nombre" name="nombre" required />
-        </div>
-        <div className="form-group">
           <label htmlFor="contraseña">Contraseña:</label>
           <input type="password" id="contraseña" name="contraseña" required />
         </div>
