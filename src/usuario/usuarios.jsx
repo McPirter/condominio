@@ -1,9 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { useNavigate } from 'react-router-dom';
 import './usuario.css';
 
+// Importa las imágenes desde src/assets/imagenes
+import masImg from '../assets/imagenes/mas.png';
+import pagoImg from '../assets/imagenes/pago.png';
+import multaImg from '../assets/imagenes/multa.png';
+import permisoImg from '../assets/imagenes/permiso.png';
+import agregarMultaImg from '../assets/imagenes/mas.png'; // Agrega la imagen para "Agregar Multa"
+
 const Usuarios = () => {
-  const navigate = useNavigate(); // Hook para navegar entre rutas
+  const navigate = useNavigate();
 
   const data = [
     { nombre: 'Edson Pérez', perfil: 'Administrador' },
@@ -12,27 +19,36 @@ const Usuarios = () => {
   ];
 
   const handleAgregar = () => {
-    navigate('/usuario/nuevo_user'); // Navega a nuevo_user.jsx
+    navigate('/usuario/nuevo_user');
   };
 
   const handlePagos = () => {
-    navigate('/usuario/pagos'); // Navega a pagos.jsx
+    navigate('/usuario/pagos');
   };
 
   const handleMultas = () => {
-    navigate('/usuario/multas'); // Navega a multas.jsx
+    navigate('/usuario/multas');
   };
 
   const handlePermisos = () => {
-    navigate('/usuario/permisos'); // Navega a permisos.jsx
+    navigate('/usuario/permisos');
+  };
+
+  const handleAgregarMulta = () => {
+    navigate('/usuario/agregarmulta'); // Redirige a la página de agregar multa
   };
 
   return (
     <div className="usuarios-container">
       <h1>Gestión de Usuarios</h1>
       <button className="btn-agregar" onClick={handleAgregar}>
-        <img src="/src/imagenes/mas.png" alt="Agregar" className="btn-icon" />
+        <img src={masImg} alt="Agregar" className="btn-icon" />
         Agregar
+      </button>
+      {/* Botón para agregar multa */}
+      <button className="btn-agregar" onClick={handleAgregarMulta}>
+        <img src={agregarMultaImg} alt="Agregar Multa" className="btn-icon" />
+        Agregar Multa
       </button>
       <table className="tabla-usuarios">
         <thead>
@@ -49,15 +65,15 @@ const Usuarios = () => {
               <td className="tabla-texto">{usuario.perfil}</td>
               <td>
                 <button className="btn-accion" onClick={handlePagos}>
-                  <img src="/src/imagenes/pago.png" alt="Pagos" className="btn-icon" />
+                  <img src={pagoImg} alt="Pagos" className="btn-icon" />
                   Pagos
                 </button>
                 <button className="btn-accion btn-multas" onClick={handleMultas}>
-                  <img src="/src/imagenes/multa.png" alt="Multas" className="btn-icon" />
+                  <img src={multaImg} alt="Multas" className="btn-icon" />
                   Multas
                 </button>
                 <button className="btn-accion btn-permisos" onClick={handlePermisos}>
-                  <img src="/src/imagenes/permiso.png" alt="Permisos" className="btn-icon" />
+                  <img src={permisoImg} alt="Permisos" className="btn-icon" />
                   Permisos
                 </button>
               </td>

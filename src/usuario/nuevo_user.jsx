@@ -7,6 +7,7 @@ const NuevoUser = () => {
     nombre: '',
     contraseña: '',
     confirmarContraseña: '',
+    perfil: 'Usuario', // Perfil predeterminado
   });
 
   const handleChange = (e) => {
@@ -14,14 +15,42 @@ const NuevoUser = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.contraseña !== formData.confirmarContraseña) {
       alert('Las contraseñas no coinciden');
       return;
     }
-    alert('Usuario agregado exitosamente');
-    setFormData({ telefono: '', nombre: '', contraseña: '', confirmarContraseña: '' });
+
+    try {
+      const response = await fetch('http://localhost:4000/api/crear_usuario', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          telefono: formData.telefono,
+          nombre: formData.nombre,
+          contraseña: formData.contraseña,
+          perfil: formData.perfil, // Incluye el perfil
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        alert('Usuario agregado exitosamente');
+        setFormData({
+          telefono: '',
+          nombre: '',
+          contraseña: '',
+          confirmarContraseña: '',
+          perfil: 'Usuario',
+        });
+      } else {
+        alert(result.message || 'Error al agregar usuario');
+      }
+    } catch (error) {
+      console.error('Error al agregar usuario:', error);
+      alert('Error al agregar usuario');
+    }
   };
 
   return (
@@ -71,6 +100,20 @@ const NuevoUser = () => {
             onChange={handleChange}
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="perfil">Perfil:</label>
+          <select
+            id="perfil"
+            name="perfil"
+            value={formData.perfil}
+            onChange={handleChange}
+            required
+          >
+            <option value="Usuario">Usuario</option>
+            <option value="Jefe">Jefe</option>
+            <option value="Administrador">Administrador</option>
+          </select>
         </div>
         <button type="submit" className="btn-enviar">
           Agregar Usuario

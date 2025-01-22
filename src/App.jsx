@@ -2,44 +2,44 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
 
+import ubicacionImg from './assets/imagenes/ubicacion.png';
+import condominioImg from './assets/imagenes/condominio.png';
+import serviciosImg from './assets/imagenes/servicios.png';
+import usuarioImg from './assets/imagenes/usuario.png';
+import fondoImg from './assets/imagenes/fondo.jpg';
+
 const App = () => {
   return (
     <div className="app-container">
-      {/* Navbar */}
       <header className="header">
         <div className="nav-center">
           <button className="nav-item">
-            <img src="src/imagenes/ubicacion.png" alt="Ubicación" className="nav-icon" />
+            <img src={ubicacionImg} alt="Ubicación" className="nav-icon" />
             <span>Ubicación</span>
           </button>
           <Link to="/condominios/condominio">
-          <button className="nav-item">
-            <img src="src/imagenes/condominio.png" alt="Condominios" className="nav-icon" />
-            <span>Condominios</span>
-          </button></Link>
+            <button className="nav-item">
+              <img src={condominioImg} alt="Condominios" className="nav-icon" />
+              <span>Condominios</span>
+            </button>
+          </Link>
           <Link to="./pagar">
-          <button className="nav-item">
-            <img src="src/imagenes/servicios.png" alt="Servicios" className="nav-icon" />
-            <span>Servicios</span>
-          </button></Link>
+            <button className="nav-item">
+              <img src={serviciosImg} alt="Servicios" className="nav-icon" />
+              <span>Servicios</span>
+            </button>
+          </Link>
         </div>
-        {/* Enlace al login */}
         <Link to="/usuario/login" className="profile-icon">
-          <img src="src/imagenes/usuario.png" alt="Perfil" />
+          <img src={usuarioImg} alt="Perfil" />
           <span>Perfil</span>
         </Link>
       </header>
 
-      {/* Cuerpo Principal */}
       <main className="main-content">
-        <img
-          src="src/imagenes/fondo.jpg"
-          alt="Condominios"
-          className="condo-image"
-        />
+        <img src={fondoImg} alt="Condominios" className="condo-image" />
       </main>
 
-      {/* Botón flotante de WhatsApp */}
       <a
         href="https://wa.me/1234567890"
         className="whatsapp-button"
