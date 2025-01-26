@@ -38,6 +38,10 @@ const Usuarios = () => {
     navigate('/usuario/agregarmulta'); // Redirige a la página de agregar multa
   };
 
+  const handleAgregarDepa = () => {
+    navigate('/usuario/agregardepa'); // Redirige a la página de agregar multa
+  };
+
   return (
     <div className="usuarios-container">
       <h1>Gestión de Usuarios</h1>
@@ -49,6 +53,11 @@ const Usuarios = () => {
       <button className="btn-agregar" onClick={handleAgregarMulta}>
         <img src={agregarMultaImg} alt="Agregar Multa" className="btn-icon" />
         Agregar Multa
+      </button>
+
+      <button className="btn-agregar" onClick={handleAgregarDepa}>
+        <img src={agregarMultaImg} alt="Agregar Multa" className="btn-icon" />
+        Agregar Depa
       </button>
       <table className="tabla-usuarios">
         <thead>

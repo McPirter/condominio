@@ -5,10 +5,12 @@ import App from './App';
 import Pagar from './pagar';
 import Login from './usuario/login';
 import Usuarios from './usuario/usuarios';
+import Inicio from './usuario/inicio';
 import NuevoUser from './usuario/nuevo_user';
 import Pagos from './usuario/pagos';
 import Multas from './usuario/multas';
 import AgregarMulta from './usuario/agregarmulta';
+import AgregarDepa from './usuario/agregardepa';
 import Permisos from './usuario/permisos';
 import Condominio from './condominios/condominio';
 import './index.css';
@@ -21,10 +23,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/pagar" element={<Pagar />} />
         <Route path="/usuario/login" element={<Login />} />
         <Route path="/usuario/usuarios" element={<Usuarios />} />
+        <Route path="/usuario/inicio" element={<Inicio />} />
         <Route path="/usuario/nuevo_user" element={<NuevoUser />} />
         <Route path="/usuario/pagos" element={<Pagos />} />
         <Route path="/usuario/multas" element={<Multas />} />
         <Route path="/usuario/agregarmulta" element={<AgregarMulta />} />
+        <Route path="/usuario/agregardepa" element={<AgregarDepa />} />
         <Route path="/usuario/permisos" element={<Permisos />} />
         <Route path="/condominios/condominio" element={<Condominio />} />
       </Routes>

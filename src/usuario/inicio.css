@@ -1,0 +1,100 @@
+.inicio-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f1f1f1;
+  min-height: 100vh;
+}
+
+.notifications-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.notifications-toggle {
+  padding: 12px 24px;
+  background-color: #28a745;  /* Cambié el color a verde */
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.notifications-toggle:hover {
+  background-color: #218838;  /* Verde más oscuro al pasar el ratón */
+  transform: scale(1.05);  /* Efecto de agrandar al pasar el ratón */
+}
+
+.notifications-panel {
+  margin-top: 10px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  width: 100%;
+}
+
+.notifications-panel h2 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+.notifications-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notifications-panel li {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s;
+  color: #000;  /* Letras negras en las notificaciones */
+}
+
+.notifications-panel li:hover {
+  background-color: #f1f3f5;
+}
+
+.notifications-panel li span {
+  color: #6c757d;  /* Gris para la fecha */
+  font-size: 12px;
+}
+
+.notifications-panel button {
+  background-color: #dc3545;  /* Rojo para eliminar */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.notifications-panel button:hover {
+  background-color: #c82333;  /* Rojo más oscuro */
+}
+
+.notifications-container button:focus,
+.notifications-panel button:focus {
+  outline: none;
+}
+
+.notifications-panel li:last-child {
+  margin-bottom: 0;
+}

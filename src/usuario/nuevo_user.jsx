@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './acciones.css';
 
 const NuevoUser = () => {
@@ -8,7 +8,29 @@ const NuevoUser = () => {
     contraseña: '',
     confirmarContraseña: '',
     perfil: 'Usuario', // Perfil predeterminado
+    departamento: 'No aplica', // Por defecto no aplica
   });
+
+  const [departamentos, setDepartamentos] = useState([]);
+
+  // Cargar los departamentos desde la API
+  useEffect(() => {
+    const fetchDepartamentos = async () => {
+      try {
+        const response = await fetch('https://apicondominio-p4vc.onrender.com/api/departamentos');
+        const result = await response.json();
+        if (response.ok) {
+          setDepartamentos(result.departamentos);
+        } else {
+          console.error(result.message);
+        }
+      } catch (error) {
+        console.error('Error al obtener departamentos:', error);
+      }
+    };
+    
+    fetchDepartamentos();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,15 +45,10 @@ const NuevoUser = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/api/crear_usuario', {
+      const response = await fetch('https://apicondominio-p4vc.onrender.com/api/crear_usuario', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          telefono: formData.telefono,
-          nombre: formData.nombre,
-          contraseña: formData.contraseña,
-          perfil: formData.perfil, // Incluye el perfil
-        }),
+        body: JSON.stringify(formData),
       });
 
       const result = await response.json();
@@ -43,6 +60,7 @@ const NuevoUser = () => {
           contraseña: '',
           confirmarContraseña: '',
           perfil: 'Usuario',
+          departamento: 'No aplica', // Resetear departamento
         });
       } else {
         alert(result.message || 'Error al agregar usuario');
@@ -113,6 +131,23 @@ const NuevoUser = () => {
             <option value="Usuario">Usuario</option>
             <option value="Jefe">Jefe</option>
             <option value="Administrador">Administrador</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="departamento">Departamento:</label>
+          <select
+            id="departamento"
+            name="departamento"
+            value={formData.departamento}
+            onChange={handleChange}
+            required
+          >
+            <option value="No aplica">No aplica</option>
+            {departamentos.map((depa) => (
+              <option key={depa._id} value={depa._id}>
+                {depa.numero} {depa.lugar}
+              </option>
+            ))}
           </select>
         </div>
         <button type="submit" className="btn-enviar">

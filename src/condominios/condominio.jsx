@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import './condominio.css';
+import condominio1 from '../assets/imagenes/condominios/condominio1.jpg';
+import condominio2 from '../assets/imagenes/condominios/condominio2.jpg';
+import condominio3 from '../assets/imagenes/condominios/condominio3.jpg';
 
 const Condominio = () => {
-    const images = [
-        "/src/imagenes/condominios/condominio1.jpg",
-        "/src/imagenes/condominios/condominio2.jpg",
-        "/src/imagenes/condominios/condominio3.jpg",
-    ];
+    const images = [condominio1, condominio2, condominio3];
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -34,7 +33,7 @@ const Condominio = () => {
             </div>
             <div className="condominio-description-box">
                 <img
-                    src="/src/imagenes/condominios/condominio1.jpg"
+                    src={condominio1}
                     alt="Condominio Descripción"
                     className="condominio-description-image"
                 />
