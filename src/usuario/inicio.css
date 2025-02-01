@@ -98,3 +98,121 @@
 .notifications-panel li:last-child {
   margin-bottom: 0;
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.notifications {
+  position: relative;
+}
+
+.bell-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.notification-icon {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.new-notification {
+  color: red; /* Cambia de color si hay nuevas notificaciones */
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 8px;
+  font-size: 12px;
+}
+
+/* Panel de notificaciones */
+.notifications-panel {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 250px;
+  background: white;
+  color: black;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.notifications-panel h3 {
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.notifications-panel ul {
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.notification-item span {
+  flex: 1;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+.notifications-panel button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+  background: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}

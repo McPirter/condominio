@@ -12,6 +12,8 @@ import Multas from './usuario/multas';
 import AgregarMulta from './usuario/agregarmulta';
 import AgregarDepa from './usuario/agregardepa';
 import Permisos from './usuario/permisos';
+import MultasUser from './usuario/multauser';
+import PermisoUser from './usuario/permisouser';
 import Condominio from './condominios/condominio';
 import './index.css';
 
@@ -30,6 +32,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/usuario/agregarmulta" element={<AgregarMulta />} />
         <Route path="/usuario/agregardepa" element={<AgregarDepa />} />
         <Route path="/usuario/permisos" element={<Permisos />} />
+        <Route path="/usuario/multauser" element={<MultasUser />} />
+        <Route path="/usuario/permisouser" element={<PermisoUser />} />
         <Route path="/condominios/condominio" element={<Condominio />} />
       </Routes>
     </BrowserRouter>
