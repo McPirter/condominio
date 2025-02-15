@@ -1,17 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Bell, Trash } from "lucide-react"; // Ícono de campana y eliminar
+import { Bell, Trash } from "lucide-react"; // Íconos de campana y eliminar
 
 const Navbar = () => {
   const [notificaciones, setNotificaciones] = useState([]);
-  const [isOpen, setIsOpen] = useState(false); // Controla la visibilidad del panel
-  const userId = localStorage.getItem("userId");
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Leer userId y token desde localStorage
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
+    console.log("userId leído desde localStorage:", userId);
+    console.log("token leído desde localStorage:", token);
+
     const fetchNotifications = async () => {
+      if (!userId || !token) {
+        console.error("No hay userId o token disponible para obtener notificaciones");
+        return;
+      }
+
       try {
-        const response = await fetch(`https://apicondominio-p4vc.onrender.com/api/notificaciones/${userId}`);
+        const response = await fetch(`https://apicondominio-p4vc.onrender.com/api/notificaciones/${userId}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
         const result = await response.json();
+        console.log("Resultado de la API:", result);
+
         if (Array.isArray(result)) {
           setNotificaciones(result);
         } else {
@@ -22,19 +42,23 @@ const Navbar = () => {
       }
     };
 
-    if (userId) {
+    if (userId && token) {
       fetchNotifications();
-      const interval = setInterval(fetchNotifications, 5000);
+      const interval = setInterval(fetchNotifications, 5000); // Actualiza cada 5 segundos
       return () => clearInterval(interval);
     }
-  }, [userId]);
+  }, [userId, token]);
 
-  // Función para eliminar notificaciones
   const handleDeleteNotification = async (notificacionId) => {
     try {
       await fetch(`https://apicondominio-p4vc.onrender.com/api/notificaciones/${notificacionId}`, {
         method: "PUT",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       });
+
       setNotificaciones((prev) => prev.filter((notif) => notif._id !== notificacionId));
     } catch (error) {
       console.error("Error al marcar notificación como leída:", error);
@@ -50,13 +74,11 @@ const Navbar = () => {
         <li><Link to="/usuario/permisouser">Permisos</Link></li>
       </ul>
       <div className="notifications">
-        {/* Ícono de campana con contador */}
         <div className="bell-container" onClick={() => setIsOpen(!isOpen)}>
           <Bell className={`notification-icon ${notificaciones.length > 0 ? "new-notification" : ""}`} />
           {notificaciones.length > 0 && <span className="badge">{notificaciones.length}</span>}
         </div>
 
-        {/* Panel de notificaciones */}
         {isOpen && (
           <div className="notifications-panel">
             <h3>Notificaciones</h3>

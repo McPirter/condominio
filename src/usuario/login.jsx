@@ -9,29 +9,32 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Evita recargar la página
-  
+    event.preventDefault();
+
     try {
       const response = await fetch('https://apicondominio-p4vc.onrender.com/api/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ telefono, contraseña }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        // Guardar el userId en localStorage
-        console.log(data);  // Verifica que el userId se reciba correctamente
+        console.log("Respuesta del backend:", data);
+        // Se espera que el backend retorne { message, token, userId, perfil }
+        // Guarda userId y token en localStorage para facilitar su acceso
         localStorage.setItem('userId', data.userId);
-  
+        localStorage.setItem('token', data.token);
+
+        console.log("userId guardado en localStorage:", data.userId);
+        console.log("token guardado en localStorage:", data.token);
+
         // Redirigir según el perfil
         if (data.perfil === 'Administrador') {
-          navigate('/usuario/usuarios'); // Página de Administrador
+          navigate('/usuario/usuarios');
         } else {
-          navigate('/usuario/inicio'); // Página de Usuario o Jefe
+          navigate('/usuario/inicio');
         }
       } else {
         setError(data.message || 'Error al iniciar sesión');
