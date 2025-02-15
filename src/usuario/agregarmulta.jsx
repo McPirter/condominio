@@ -10,6 +10,8 @@ const AgregarMulta = () => {
     departamento: '',
   });
 
+  const token = localStorage.getItem('token');
+
   const [departamentos, setDepartamentos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +20,13 @@ const AgregarMulta = () => {
   useEffect(() => {
     const fetchDepartamentos = async () => {
       try {
-        const response = await fetch('https://apicondominio-p4vc.onrender.com/api/obtener_departamentos');
+        const response = await fetch('https://apicondominio-p4vc.onrender.com/api/obtener_departamentos',{
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }
+        });
         const result = await response.json();
         setDepartamentos(result);
       } catch (error) {
@@ -40,7 +48,10 @@ const AgregarMulta = () => {
     try {
       const response = await fetch('https://apicondominio-p4vc.onrender.com/api/agregar_multa', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(multaData),
       });
       const result = await response.json();

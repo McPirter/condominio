@@ -7,6 +7,9 @@ const AgregarDepa = () => {
     lugar: '',
   });
 
+  const token = localStorage.getItem('token');
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDepaData({ ...depaData, [name]: value });
@@ -17,7 +20,10 @@ const AgregarDepa = () => {
     try {
       const response = await fetch('https://apicondominio-p4vc.onrender.com/api/agregar_depa', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(depaData),
       });
       const result = await response.json();

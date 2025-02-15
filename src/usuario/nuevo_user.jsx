@@ -11,26 +11,29 @@ const NuevoUser = () => {
     departamento: 'No aplica', // Por defecto no aplica
   });
 
+  const token = localStorage.getItem('token');
+
   const [departamentos, setDepartamentos] = useState([]);
 
   // Cargar los departamentos desde la API
   useEffect(() => {
-    const fetchDepartamentos = async () => {
-      try {
-        const response = await fetch('https://apicondominio-p4vc.onrender.com/api/departamentos');
-        const result = await response.json();
-        if (response.ok) {
-          setDepartamentos(result.departamentos);
-        } else {
-          console.error(result.message);
+      const fetchDepartamentos = async () => {
+        try {
+          const response = await fetch('https://apicondominio-p4vc.onrender.com/api/obtener_departamentos',{
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            }
+          });
+          const result = await response.json();
+          setDepartamentos(result);
+        } catch (error) {
+          console.error('Error al obtener departamentos:', error);
         }
-      } catch (error) {
-        console.error('Error al obtener departamentos:', error);
-      }
-    };
-    
-    fetchDepartamentos();
-  }, []);
+      };
+      fetchDepartamentos();
+    }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +50,10 @@ const NuevoUser = () => {
     try {
       const response = await fetch('https://apicondominio-p4vc.onrender.com/api/crear_usuario', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(formData),
       });
 
