@@ -72,6 +72,7 @@ const Navbar = () => {
         <li><Link to="/usuario/inicio">Inicio</Link></li>
         <li><Link to="/usuario/multauser">Multas</Link></li>
         <li><Link to="/usuario/permisouser">Permisos</Link></li>
+        <li><Link to="/usuario/cambiarcontraseña">Usuario</Link></li>
       </ul>
       <div className="notifications">
         <div className="bell-container" onClick={() => setIsOpen(!isOpen)}>

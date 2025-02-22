@@ -15,6 +15,7 @@ import Permisos from './usuario/permisos';
 import MultasUser from './usuario/multauser';
 import PermisoUser from './usuario/permisouser';
 import Condominio from './condominios/condominio';
+import CambiarContra from './usuario/cambiarcon';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -34,6 +35,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/usuario/permisos" element={<Permisos />} />
         <Route path="/usuario/multauser" element={<MultasUser />} />
         <Route path="/usuario/permisouser" element={<PermisoUser />} />
+        <Route path="/usuario/cambiarcontraseña" element={<CambiarContra />} />
         <Route path="/condominios/condominio" element={<Condominio />} />
       </Routes>
     </BrowserRouter>
