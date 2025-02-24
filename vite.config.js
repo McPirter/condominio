@@ -5,6 +5,9 @@ export default defineConfig({
   plugins: [react()],
   base: '/', // Asegura que la base sea correcta
   build: {
-    outDir: 'dist'
+    outDir: 'dist' // Asegura la carpeta de salida correcta
+  },
+  server: {
+    historyApiFallback: true // Permite navegación en Vercel
   }
 });
