@@ -16,6 +16,7 @@ import MultasUser from './usuario/multauser';
 import PermisoUser from './usuario/permisouser';
 import Condominio from './condominios/condominio';
 import CambiarContra from './usuario/cambiarcon';
+import RecuperarContra from './usuario/recupera_contra';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -37,6 +38,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/usuario/permisouser" element={<PermisoUser />} />
         <Route path="/usuario/cambiarcontraseña" element={<CambiarContra />} />
         <Route path="/condominios/condominio" element={<Condominio />} />
+        <Route path="/usuario/recuperar_contra/:token" element={<RecuperarContra />} />
+           
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
