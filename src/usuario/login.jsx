@@ -1,36 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './usuario.css';
-import ProtectedRoute from './protect';
+
 const Login = () => {
   const [telefono, setTelefono] = useState('');
   const [contraseña, setContraseña] = useState('');
   const [error, setError] = useState('');
+  const [showModal, setShowModal] = useState(false); // Para mostrar el modal
   const navigate = useNavigate();
 
+  // Función para manejar el inicio de sesión
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const response = await fetch('https://apicondominio-p4vc.onrender.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ telefono, contraseña }),
       });
-
       const data = await response.json();
-
       if (response.ok) {
-        console.log("Respuesta del backend:", data);
-        // Se espera que el backend retorne { message, token, userId, perfil }
-        // Guarda userId y token en localStorage para facilitar su acceso
         localStorage.setItem('userId', data.userId);
         localStorage.setItem('token', data.token);
-
-        console.log("userId guardado en localStorage:", data.userId);
-        console.log("token guardado en localStorage:", data.token);
-
-        // Redirigir según el perfil
         if (data.perfil === 'Administrador') {
           navigate('/usuario/usuarios');
         } else {
@@ -41,6 +32,29 @@ const Login = () => {
       }
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
+      setError('Error al conectar con el servidor');
+    }
+  };
+
+  // Función para manejar el envío del teléfono para la recuperación
+  const handleRecoverPassword = async (event) => {
+    event.preventDefault();
+    const telefonoConPrefijo = '+52' + telefono;  // Agregar +52 al teléfono
+    try {
+      const response = await fetch('https://apicondominio-p4vc.onrender.com/api/recuperar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ telefono: telefonoConPrefijo }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert('Se ha enviado el link de recuperación por WhatsApp');
+        setShowModal(false); // Cerrar el modal
+      } else {
+        setError(data.message || 'Error al recuperar contraseña');
+      }
+    } catch (error) {
+      console.error('Error al enviar el mensaje:', error);
       setError('Error al conectar con el servidor');
     }
   };
@@ -74,6 +88,34 @@ const Login = () => {
         {error && <p className="error">{error}</p>}
         <button type="submit">Iniciar sesión</button>
       </form>
+
+      {/* Botón para abrir el modal de recuperación */}
+      <button onClick={() => setShowModal(true)} className="recuperar-btn">Recuperar Contraseña</button>
+
+      {/* Modal de recuperación */}
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Recuperación de Contraseña</h2>
+            <form onSubmit={handleRecoverPassword}>
+              <div className="form-group">
+                <label htmlFor="telefonoRecuperacion">Num. telefónico (sin +52):</label>
+                <input
+                  type="text"
+                  id="telefonoRecuperacion"
+                  name="telefonoRecuperacion"
+                  value={telefono}
+                  onChange={(e) => setTelefono(e.target.value)}
+                  required
+                />
+              </div>
+              {error && <p className="error">{error}</p>}
+              <button type="submit">Enviar Link de Recuperación</button>
+            </form>
+            <button onClick={() => setShowModal(false)} className="cerrar-modal">Cerrar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
