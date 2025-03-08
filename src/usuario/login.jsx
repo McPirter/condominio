@@ -6,8 +6,8 @@ const Login = () => {
   const [telefono, setTelefono] = useState('');
   const [contraseña, setContraseña] = useState('');
   const [error, setError] = useState('');
-  const [showModal, setShowModal] = useState(false); // Para mostrar el modal
-  const [telefonoRecuperacion, setTelefonoRecuperacion] = useState(''); // Nuevo estado para teléfono de recuperación
+  const [showModal, setShowModal] = useState(false);
+  const [telefonoRecuperacion, setTelefonoRecuperacion] = useState(''); // Nuevo estado para el modal
   const navigate = useNavigate();
 
   // Función para manejar el inicio de sesión
@@ -40,7 +40,7 @@ const Login = () => {
   // Función para manejar el envío del teléfono para la recuperación
   const handleRecoverPassword = async (event) => {
     event.preventDefault();
-    const telefonoConPrefijo = '+52' + telefonoRecuperacion; // Usar el nuevo estado telefonoRecuperacion
+    const telefonoConPrefijo = '52' + telefonoRecuperacion; // Usamos telefonoRecuperacion en lugar de telefono
     try {
       const response = await fetch('https://apicondominio-p4vc.onrender.com/api/recuperar', {
         method: 'POST',
@@ -51,6 +51,7 @@ const Login = () => {
       if (response.ok) {
         alert('Se ha enviado el link de recuperación por WhatsApp');
         setShowModal(false); // Cerrar el modal
+        setTelefonoRecuperacion(''); // Limpiar campo
       } else {
         setError(data.message || 'Error al recuperar contraseña');
       }
@@ -95,7 +96,7 @@ const Login = () => {
 
       {/* Modal de recuperación */}
       {showModal && (
-        <div className="modal">
+        <div className="modal show">
           <div className="modal-content">
             <h2>Recuperación de Contraseña</h2>
             <form onSubmit={handleRecoverPassword}>
@@ -105,7 +106,7 @@ const Login = () => {
                   type="text"
                   id="telefonoRecuperacion"
                   name="telefonoRecuperacion"
-                  value={telefonoRecuperacion}
+                  value={telefonoRecuperacion} // Usamos telefonoRecuperacion
                   onChange={(e) => setTelefonoRecuperacion(e.target.value)}
                   required
                 />
