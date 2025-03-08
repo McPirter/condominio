@@ -7,6 +7,7 @@ const Login = () => {
   const [contraseña, setContraseña] = useState('');
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false); // Para mostrar el modal
+  const [telefonoRecuperacion, setTelefonoRecuperacion] = useState(''); // Nuevo estado para teléfono de recuperación
   const navigate = useNavigate();
 
   // Función para manejar el inicio de sesión
@@ -39,7 +40,7 @@ const Login = () => {
   // Función para manejar el envío del teléfono para la recuperación
   const handleRecoverPassword = async (event) => {
     event.preventDefault();
-    const telefonoConPrefijo = '+52' + telefono;  // Agregar +52 al teléfono
+    const telefonoConPrefijo = '+52' + telefonoRecuperacion; // Usar el nuevo estado telefonoRecuperacion
     try {
       const response = await fetch('https://apicondominio-p4vc.onrender.com/api/recuperar', {
         method: 'POST',
@@ -104,8 +105,8 @@ const Login = () => {
                   type="text"
                   id="telefonoRecuperacion"
                   name="telefonoRecuperacion"
-                  value={telefono}
-                  onChange={(e) => setTelefono(e.target.value)}
+                  value={telefonoRecuperacion}
+                  onChange={(e) => setTelefonoRecuperacion(e.target.value)}
                   required
                 />
               </div>
