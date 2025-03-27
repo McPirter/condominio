@@ -46,7 +46,7 @@ const RecuperarContra = () => {
 
             if (response.status === 200) {
                 setMessage("Contraseña cambiada exitosamente. Redirigiendo...");
-                setTimeout(() => navigate("/login"), 2000);
+                setTimeout(() => navigate("/usuario/login"), 2000);
             }
         } catch (error) {
             setMessage(error.response?.data?.message || "Error al cambiar contraseña.");

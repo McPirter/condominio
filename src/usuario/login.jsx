@@ -40,16 +40,15 @@ const Login = () => {
   // Función para manejar el envío del teléfono para la recuperación
   const handleRecoverPassword = async (event) => {
     event.preventDefault();
-    const telefonoConPrefijo = '52' + telefonoRecuperacion; // Usamos telefonoRecuperacion en lugar de telefono
     try {
       const response = await fetch('https://apicondominio-p4vc.onrender.com/api/recuperar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ telefono: telefonoConPrefijo }),
+        body: JSON.stringify({ telefono: telefonoRecuperacion }), // Enviar el teléfono directamente
       });
       const data = await response.json();
       if (response.ok) {
-        alert('Se ha enviado el link de recuperación por WhatsApp');
+        alert('Se ha enviado el link de recuperación al correo registrado');
         setShowModal(false); // Cerrar el modal
         setTelefonoRecuperacion(''); // Limpiar campo
       } else {
@@ -101,7 +100,7 @@ const Login = () => {
             <h2>Recuperación de Contraseña</h2>
             <form onSubmit={handleRecoverPassword}>
               <div className="form-group">
-                <label htmlFor="telefonoRecuperacion">Num. telefónico (sin +52):</label>
+                <label htmlFor="telefonoRecuperacion">Num. telefónico:</label>
                 <input
                   type="text"
                   id="telefonoRecuperacion"
